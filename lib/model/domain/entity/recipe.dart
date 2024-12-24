@@ -1,7 +1,7 @@
 import 'dart:collection';
 
-import 'package:cook_mark/model/dto/recipe_dto.dart';
-import 'package:cook_mark/model/entity/difficulty.dart';
+import 'package:cook_mark/model/data/dto/recipe_dto.dart';
+import 'package:cook_mark/model/domain/entity/difficulty.dart';
 import 'package:equatable/equatable.dart';
 
 class Recipe extends Equatable {
