@@ -1,20 +1,22 @@
-import 'package:cook_mark/model/data/repository/recipe_repository_impl.dart';
+import 'dart:collection';
+
 import 'package:cook_mark/model/domain/entity/recipe.dart';
 import 'package:cook_mark/model/domain/repository/recipe_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/cupertino.dart';
 
-class RecipeNotifier extends StateNotifier<List<Recipe>> {
+class RecipeViewmodel extends ChangeNotifier {
   final RecipeRepository repository;
+  final List<Recipe> _recipes = [];
 
-  RecipeNotifier(super.state, this.repository);
+  List<Recipe> get recipes => UnmodifiableListView(_recipes);
+
+  RecipeViewmodel({
+    required this.repository,
+  });
 
   void getAllRecipes() async {
-    final allRecipes = await repository.getAllRecipes();
-
-    state = [...allRecipes];
+    final recipesFromRemote = await repository.getAllRecipes();
+    _recipes.addAll(recipesFromRemote);
+    notifyListeners();
   }
 }
-
-final recipeViewModelProvider = StateNotifierProvider<RecipeNotifier, List<Recipe>>((ref) {
-  return RecipeNotifier([], ref.read(recipeRepositoryProvider));
-});

@@ -14,7 +14,7 @@ class RecipeDTO extends Equatable {
   final List<String> tags;
   final int userId;
   final String image;
-  final double rating;
+  final num rating;
   final int reviewCount;
   final List<String> mealType;
 
@@ -38,7 +38,7 @@ class RecipeDTO extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         name,
         ingredients,
@@ -62,7 +62,7 @@ class RecipeDTO extends Equatable {
       'id': id,
       'name': name,
       'ingredients': ingredients,
-      'instruction': instructions,
+      'instructions': instructions,
       'prepTimeMinutes': prepTimeMinutes,
       'cookTimeMinutes': cookTimeMinutes,
       'servings': servings,
@@ -82,20 +82,20 @@ class RecipeDTO extends Equatable {
     return RecipeDTO(
       id: map['id'] as int,
       name: map['name'] as String,
-      ingredients: map['ingredients'] as List<String>,
-      instructions: map['instruction'] as List<String>,
+      ingredients: (map['ingredients'] as List<dynamic>).cast<String>(),
+      instructions: (map['instructions'] as List<dynamic>).cast<String>(),
       prepTimeMinutes: map['prepTimeMinutes'] as int,
       cookTimeMinutes: map['cookTimeMinutes'] as int,
       servings: map['servings'] as int,
       difficulty: map['difficulty'] as String,
       cuisine: map['cuisine'] as String,
       caloriesPerServing: map['caloriesPerServing'] as int,
-      tags: map['tags'] as List<String>,
+      tags: (map['tags'] as List<dynamic>).cast<String>(),
       userId: map['userId'] as int,
       image: map['image'] as String,
-      rating: map['rating'] as double,
+      rating: map['rating'] as num,
       reviewCount: map['reviewCount'] as int,
-      mealType: map['mealType'] as List<String>,
+      mealType: (map['mealType'] as List<dynamic>).cast<String>(),
     );
   }
 }

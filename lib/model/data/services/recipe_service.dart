@@ -18,11 +18,10 @@ class RecipeService {
     final List<dynamic> recipeList = jsonDecode(responseBody)['recipes'];
     final List<Recipe> recipes = [];
 
-    for (var recipe in recipeList) {
+    for (Map<String, dynamic> recipe in recipeList) {
       final recipeDto = RecipeDTO.fromMap(recipe);
-      recipe.add(Recipe.fromDTO(recipeDto));
+      recipes.add(Recipe.fromDTO(recipeDto));
     }
-
     return recipes;
   }
 }

@@ -17,7 +17,7 @@ class Recipe extends Equatable {
   final String cuisine;
   final int caloriesPerServings;
   final String image;
-  final double rating;
+  final num rating;
   final int reviewCount;
   final UnmodifiableSetView<String> mealType;
   final int userId;
