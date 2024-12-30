@@ -1,7 +1,7 @@
 import 'package:cook_mark/app/shared_preference_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class SharedPreferenceManager {
+abstract class LocalStorage {
   Future<List<String>> get getSearchHistory;
 
   Future<int> get getLastTab;
@@ -11,10 +11,10 @@ abstract class SharedPreferenceManager {
   Future<void> updateLastTab(int tab);
 }
 
-class SharedPreferenceManagerImpl implements SharedPreferenceManager {
+class LocalStorageImpl implements LocalStorage {
   final SharedPreferences sharedPreferences;
 
-  const SharedPreferenceManagerImpl({
+  const LocalStorageImpl({
     required this.sharedPreferences,
   });
 

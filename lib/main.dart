@@ -4,7 +4,7 @@ import 'package:cook_mark/model/data/repository/recipe_repository_impl.dart';
 import 'package:cook_mark/model/data/repository/search_history_repository_impl.dart';
 import 'package:cook_mark/model/data/services/http_client.dart';
 import 'package:cook_mark/model/data/services/recipe_service.dart';
-import 'package:cook_mark/model/data/storage/shared_preference_manager.dart';
+import 'package:cook_mark/model/data/storage/local_storage.dart';
 import 'package:cook_mark/model/domain/repository/last_tab_repository.dart';
 import 'package:cook_mark/model/domain/repository/recipe_repository.dart';
 import 'package:cook_mark/model/domain/repository/search_history_repository.dart';
@@ -36,12 +36,11 @@ void main() async {
 Future<void> _initializeDependencies() async {
   final di = GetIt.I;
   final sharedPreferenceInstance = await SharedPreferences.getInstance();
-  di.registerLazySingleton<SharedPreferenceManager>(
-      () => SharedPreferenceManagerImpl(sharedPreferences: sharedPreferenceInstance));
+  di.registerLazySingleton<LocalStorage>(() => LocalStorageImpl(sharedPreferences: sharedPreferenceInstance));
   di.registerLazySingleton<SearchHistoryRepository>(
-      () => SearchHistoryRepositoryImpl(sharedPreferenceManager: di.get<SharedPreferenceManager>()));
+      () => SearchHistoryRepositoryImpl(sharedPreferenceManager: di.get<LocalStorage>()));
   di.registerLazySingleton<LastTabRepository>(
-      () => LastTabRepositoryImpl(sharedPreferenceManager: di.get<SharedPreferenceManager>()));
+      () => LastTabRepositoryImpl(sharedPreferenceManager: di.get<LocalStorage>()));
 
   di.registerLazySingleton<HttpClient>(() => HttpClientImpl(client: Client()));
   di.registerLazySingleton<RecipeService>(() => RecipeService(client: di.get<HttpClient>()));

@@ -1,8 +1,8 @@
-import 'package:cook_mark/model/data/storage/shared_preference_manager.dart';
+import 'package:cook_mark/model/data/storage/local_storage.dart';
 import 'package:cook_mark/model/domain/repository/search_history_repository.dart';
 
 class SearchHistoryRepositoryImpl implements SearchHistoryRepository {
-  final SharedPreferenceManager sharedPreferenceManager;
+  final LocalStorage sharedPreferenceManager;
 
   const SearchHistoryRepositoryImpl({
     required this.sharedPreferenceManager,

@@ -20,7 +20,7 @@ class RecipeList extends StatelessWidget {
                 child: CircularProgressIndicator.adaptive(),
               )
             : ListView.builder(
-                padding: const EdgeInsets.only(top: 72),
+                padding: const EdgeInsets.only(top: 72, left: 16, right: 16),
                 itemCount: recipes.length,
                 itemBuilder: (context, index) {
                   final recipe = recipes[index];
