@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -9,12 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        // systemStatusBarContrastEnforced: true,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );*/
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(

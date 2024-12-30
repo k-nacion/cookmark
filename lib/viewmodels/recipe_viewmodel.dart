@@ -7,16 +7,30 @@ import 'package:flutter/cupertino.dart';
 class RecipeViewmodel extends ChangeNotifier {
   final RecipeRepository repository;
   final List<Recipe> _recipes = [];
+  bool _isFetching = false;
+  bool get isFetching => _isFetching;
 
   List<Recipe> get recipes => UnmodifiableListView(_recipes);
 
   RecipeViewmodel({
     required this.repository,
-  });
+  }) {
+    getAllRecipes();
+  }
 
   void getAllRecipes() async {
-    final recipesFromRemote = await repository.getAllRecipes();
-    _recipes.addAll(recipesFromRemote);
+    if (_isFetching) return; // Prevent multiple calls
+    _isFetching = true;
     notifyListeners();
+
+    try {
+      final recipesFromRemote = await repository.getAllRecipes();
+      _recipes.addAll(recipesFromRemote);
+    } catch (error) {
+      // Handle error appropriately
+    } finally {
+      _isFetching = false;
+      notifyListeners();
+    }
   }
 }
