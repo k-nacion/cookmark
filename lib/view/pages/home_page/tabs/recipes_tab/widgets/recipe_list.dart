@@ -1,23 +1,12 @@
+import 'package:cook_mark/view/pages/home_page/tabs/recipes_tab/widgets/recipe_list_item.dart';
 import 'package:cook_mark/viewmodels/recipe_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RecipeList extends StatefulWidget {
+class RecipeList extends StatelessWidget {
   const RecipeList({
     super.key,
   });
-
-  @override
-  State<RecipeList> createState() => _RecipeListState();
-}
-
-class _RecipeListState extends State<RecipeList> {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +20,12 @@ class _RecipeListState extends State<RecipeList> {
                 child: CircularProgressIndicator.adaptive(),
               )
             : ListView.builder(
+                padding: const EdgeInsets.only(top: 72),
                 itemCount: recipes.length,
                 itemBuilder: (context, index) {
                   final recipe = recipes[index];
 
-                  return ListTile(
-                    title: Text(recipe.name),
-                  );
+                  return RecipeListItem(recipe: recipe);
                 },
               );
       },
