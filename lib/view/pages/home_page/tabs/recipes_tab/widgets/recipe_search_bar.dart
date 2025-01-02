@@ -18,6 +18,8 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
         final searchHistory = value.searchHistory;
         return SearchAnchor.bar(
           barHintText: 'Search',
+          barShape:
+              WidgetStatePropertyAll<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
           suggestionsBuilder: (context, controller) {
             return List.generate(
               searchHistory.length,

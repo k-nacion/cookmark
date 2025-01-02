@@ -24,7 +24,7 @@ class AppRouter {
               GoRoute(
                 path: '/recipe',
                 name: 'recipe',
-                builder: (context, state) => SafeArea(child: RecipeTab()),
+                builder: (context, state) => RecipeTab(),
               )
             ],
           ),

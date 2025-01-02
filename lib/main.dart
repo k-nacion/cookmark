@@ -8,6 +8,7 @@ import 'package:cook_mark/model/data/storage/local_storage.dart';
 import 'package:cook_mark/model/domain/repository/last_tab_repository.dart';
 import 'package:cook_mark/model/domain/repository/recipe_repository.dart';
 import 'package:cook_mark/model/domain/repository/search_history_repository.dart';
+import 'package:cook_mark/viewmodels/recipe_list_grid_provider.dart';
 import 'package:cook_mark/viewmodels/recipe_viewmodel.dart';
 import 'package:cook_mark/viewmodels/search_history_provider.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -27,6 +28,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => di.get<RecipeViewmodel>()),
         Provider<AppRouter>(create: (context) => AppRouter()),
         ChangeNotifierProvider<SearchHistoryProvider>(create: (context) => di.get<SearchHistoryProvider>()),
+        ChangeNotifierProvider(create: (context) => RecipeListGridProvider()),
       ],
       builder: (context, child) => CookMark(),
     ),
