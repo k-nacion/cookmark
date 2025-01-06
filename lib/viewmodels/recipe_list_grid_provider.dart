@@ -5,8 +5,8 @@ class RecipeListGridProvider extends ChangeNotifier {
 
   bool get isListView => _isListView;
 
-  void toggleView() {
-    _isListView = !_isListView;
+  void toggleView(bool isListView) {
+    _isListView = isListView;
     notifyListeners();
   }
 }

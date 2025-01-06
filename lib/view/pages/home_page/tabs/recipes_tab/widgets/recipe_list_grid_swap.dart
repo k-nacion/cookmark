@@ -18,7 +18,7 @@ class RecipeListGridSwap extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                onPressed: () => value.toggleView(),
+                onPressed: () => value.toggleView(true),
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedListView,
                   color: isListView ? Colors.black : Colors.grey,
@@ -26,7 +26,7 @@ class RecipeListGridSwap extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () => value.toggleView(),
+                onPressed: () => value.toggleView(false),
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedGridView,
                   color: isListView ? Colors.grey : Colors.black,
