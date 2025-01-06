@@ -6,27 +6,53 @@ import 'package:flutter/material.dart';
 class SearchHistoryProvider extends ChangeNotifier {
   final SearchHistoryRepository _repository;
 
-  SearchHistoryProvider({
-    required SearchHistoryRepository repository,
-  }) : _repository = repository;
-
   List<String> _searchHistory = [];
 
   List<String> get searchHistory => UnmodifiableListView(_searchHistory);
 
+  SearchHistoryProvider({
+    required SearchHistoryRepository repository,
+  }) : _repository = repository {
+    _initializeSearchHistory();
+  }
+
+  Future<void> _initializeSearchHistory() async {
+    try {
+      _searchHistory = await _repository.getSearchHistory();
+    } catch (e) {
+      debugPrint('Failed to fetch search history: $e');
+      _searchHistory.clear();
+    }
+    notifyListeners();
+  }
+
   void addToHistory(String query) {
-    _searchHistory.add(query);
-    _repository.setSearchHistory(_searchHistory);
-    notifyListeners();
+    if (!_searchHistory.contains(query)) {
+      _searchHistory.add(query);
+      notifyListeners();
+      _saveToRepository();
+    }
   }
 
-  void getSearchHistory() async {
-    _searchHistory = await _repository.getSearchHistory();
+  void removeSearchItem(String query) {
+    _searchHistory.removeWhere((element) => element == query);
     notifyListeners();
+    _saveToRepository();
   }
 
-  void clearSearchHistory() async {
+  void clearSearchHistory() {
     _searchHistory.clear();
     notifyListeners();
+    _saveToRepository();
+  }
+
+  /// Saves the current search history to the repository
+  Future<void> _saveToRepository() async {
+    try {
+      await _repository.saveSearchHistory(_searchHistory);
+    } catch (e) {
+      // Handle error (e.g., log it or notify the user)
+      debugPrint("Failed to save search history: $e");
+    }
   }
 }

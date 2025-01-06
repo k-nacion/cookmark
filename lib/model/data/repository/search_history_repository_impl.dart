@@ -14,7 +14,7 @@ class SearchHistoryRepositoryImpl implements SearchHistoryRepository {
   }
 
   @override
-  Future<void> setSearchHistory(List<String> searchHistory) async {
+  Future<void> saveSearchHistory(List<String> searchHistory) async {
     await sharedPreferenceManager.updateSearchHistory(searchHistory);
   }
 }
