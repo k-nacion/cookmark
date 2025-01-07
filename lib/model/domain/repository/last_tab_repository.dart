@@ -1,4 +1,4 @@
 abstract class LastTabRepository {
   Future<int> getLastTab();
-  Future<void> updateLastTab(int tab);
+  Future<void> saveLastTab(int tab);
 }

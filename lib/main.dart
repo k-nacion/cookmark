@@ -41,8 +41,7 @@ Future<void> _initializeDependencies() async {
   di.registerLazySingleton<LocalStorage>(() => LocalStorageImpl(sharedPreferences: sharedPreferenceInstance));
   di.registerLazySingleton<SearchHistoryRepository>(
       () => SearchHistoryRepositoryImpl(sharedPreferenceManager: di.get<LocalStorage>()));
-  di.registerLazySingleton<LastTabRepository>(
-      () => LastTabRepositoryImpl(sharedPreferenceManager: di.get<LocalStorage>()));
+  di.registerLazySingleton<LastTabRepository>(() => LastTabRepositoryImpl(localStorage: di.get<LocalStorage>()));
 
   di.registerLazySingleton<HttpClient>(() => HttpClientImpl(client: Client()));
   di.registerLazySingleton<RecipeService>(() => RecipeService(client: di.get<HttpClient>()));

@@ -24,14 +24,13 @@ class LocalStorageImpl implements LocalStorage {
   }
 
   @override
-  // TODO: implement getSearchHistory
-  Future<List<String>> get getSearchHistory async =>
-      sharedPreferences.getStringList(SharedPreferencesKeys.searchHistory)!;
-
-  @override
   Future<void> updateLastTab(int tab) async {
     await sharedPreferences.setInt(SharedPreferencesKeys.lastCurrentTab, tab);
   }
+
+  @override
+  Future<List<String>> get getSearchHistory async =>
+      sharedPreferences.getStringList(SharedPreferencesKeys.searchHistory)!;
 
   @override
   Future<void> updateSearchHistory(List<String> searchHistory) async {
