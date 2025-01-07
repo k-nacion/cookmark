@@ -8,6 +8,7 @@ import 'package:cook_mark/model/data/storage/local_storage.dart';
 import 'package:cook_mark/model/domain/repository/last_tab_repository.dart';
 import 'package:cook_mark/model/domain/repository/recipe_repository.dart';
 import 'package:cook_mark/model/domain/repository/search_history_repository.dart';
+import 'package:cook_mark/viewmodels/last_tab_provider.dart';
 import 'package:cook_mark/viewmodels/recipe_list_grid_provider.dart';
 import 'package:cook_mark/viewmodels/recipe_viewmodel.dart';
 import 'package:cook_mark/viewmodels/search_history_provider.dart';
@@ -29,6 +30,7 @@ void main() async {
         Provider<AppRouter>(create: (context) => AppRouter()),
         ChangeNotifierProvider<SearchHistoryProvider>(create: (context) => di.get<SearchHistoryProvider>()),
         ChangeNotifierProvider(create: (context) => RecipeListGridProvider()),
+        ChangeNotifierProvider(create: (context) => di.get<LastTabProvider>()),
       ],
       builder: (context, child) => CookMark(),
     ),
@@ -49,6 +51,7 @@ Future<void> _initializeDependencies() async {
   di.registerLazySingleton<SearchHistoryProvider>(
       () => SearchHistoryProvider(repository: di.get<SearchHistoryRepository>()));
   di.registerLazySingleton<RecipeViewmodel>(() => RecipeViewmodel(repository: di.get<RecipeRepository>()));
+  di.registerLazySingleton<LastTabProvider>(() => LastTabProvider(repository: di.get<LastTabRepository>()));
 }
 
 class CookMark extends StatelessWidget {
